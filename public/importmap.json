@@ -1,0 +1,12 @@
+{
+  "imports": {
+    "axios": "https://unpkg.com/axios/dist/axios.min.js",
+    "react": "https://unpkg.com/react@17/umd/react.production.min.js",
+    "react-dom": "https://unpkg.com/react-dom@17/umd/react-dom.production.min.js",
+    "react-router": "https://unpkg.com/react-router-dom@5/umd/react-router-dom.min.js",
+    "material-ui": "https://unpkg.com/@material-ui/core@latest/umd/material-ui.production.min.js",
+    "receita-component": "./components/receita.js",
+    "input-component": "./components/input.js",
+    "config": "./config.js"
+  }
+}
