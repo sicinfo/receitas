@@ -3,55 +3,57 @@
       "titulo": "pão de batata",
       "rendimento": {
         "unidade": "un",
-        "quantidade": 20,
+        "quantidadeSalto": 9,
+        "quantidadeMinimo": 9,
+        "quantidadeMaximo": 36,
         "descricao": "de 50 gramas"
       },
       "ingredientes": [
         {
           "unidade": "g",
-          "quantidade": 400,
+          "quantidadeMinimo": 100,
           "descricao": "batata inglesa cozida",
           "custo": 0
         },
         {
           "unidade": "g",
-          "quantidade": 200,
+          "quantidadeMinimo": 50,
           "descricao": "banha de porco",
           "custo": 0
         },
         {
           "unidade": "g",
-          "quantidade": 900,
+          "quantidadeMinimo": 225,
           "descricao": "farinha de trigo",
           "custo": 0
         },
         {
           "unidade": "g",
-          "quantidade": 200,
+          "quantidadeMinimo": 50,
           "descricao": "açucar cristal",
           "custo": 0
         },
         {
           "unidade": "g",
-          "quantidade": 30,
+          "quantidadeMinimo": 7.5,
           "descricao": "fermento biológico fesco",
           "custo": 0
         },
         {
           "unidade": "g",
-          "quantidade": 7,
+          "quantidadeMinimo": 2,
           "descricao": "sal refinado",
           "custo": 0
         },
         {
           "unidade": "un",
-          "quantidade": 4,
+          "quantidadeMinimo": 1,
           "descricao": "ovos grande",
           "custo": 0
         },
         {
           "unidade": "ml",
-          "quantidade": 120,
+          "quantidadeMinimo": 30,
           "descricao": "leite de vaca",
           "custo": 0
         }

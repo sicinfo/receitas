@@ -26,7 +26,7 @@ Promise.all([
   const { HashRouter: Router, Route, Link, Switch } = res[3].default;
 
   /** @type {MaterialUi}} */
-  const { Box, List, ListItem, GridList, MenuList, MenuItem } = res[4].default;
+  const { Breadcrumbs, Typography, Container, Box, List, ListItem, GridList, MenuList, MenuItem } = res[4].default;
 
   /** @type {{data:ReceitasRoute}} */
   const { data } = await Axios.get('./data.json');
@@ -35,7 +35,7 @@ Promise.all([
   paths.unshift('home');
   Reflect.set(data, 'home', { titulo: 'home' })
 
-  const ReceitaComponent = await System.import('receita-component').then(a => a.default(data))
+  const ReceitaComponent = await System.import('receita-component').then(a => a.default)
 
   {
     let title = document.head.querySelector('title');
@@ -46,16 +46,16 @@ Promise.all([
 
   render(
     h(Router, null, [
-      h(Box, { component: 'nav' }, [
-        h(Box, { component: 'h2' }, 'receitas'),
-        h(MenuList, null, paths.map(key => h(MenuItem, null, h(Link, {
+      h(Container, null, [
+        h(Typography, { variant: 'h4' }, 'receitas'),
+        h(Breadcrumbs, null, paths.map(key => h(Link, {
           to: `/${key}`
-        }, data[key].titulo))))
+        }, data[key].titulo)))
       ]),
       h(Switch, null, paths.map(key => {
         return h(Route, {
           path: `/${key}`,
-          component: () => h(ReceitaComponent, { attributes: { key } })
+          component: () => key === 'home' ? h('div') : h(ReceitaComponent, { receita: data[key] })
         })
       }))
     ]),
