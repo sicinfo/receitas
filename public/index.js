@@ -55,7 +55,7 @@ Promise.all([
       h(Switch, null, paths.map(key => {
         return h(Route, {
           path: `/${key}`,
-          component: () => key === 'home' ? h('div') : h(ReceitaComponent, { receita: data[key] })
+          component: () => key === 'home' ? h('div') : h(ReceitaComponent, { receita: data[key], "custos": data.custos })
         })
       }))
     ]),
