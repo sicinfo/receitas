@@ -1,61 +1,90 @@
 {
+    "custos": {
+      "batata inglesa cozida": {
+        "unidade": "g",
+        "quantidade": 1000,
+        "custo": 4
+      },
+      "banha de porco": {
+        "unidade": "g",
+        "quantidade": 1000,
+        "custo": 24
+      },
+      "farinha de trigo": {
+        "unidade": "g",
+        "quantidade": 1000,
+        "custo": 4.4
+      },
+      "açucar cristal": {
+        "unidade": "g",
+        "quantidade": 1000,
+        "custo": 4.8
+      },
+      "fermento biológico fresco": {
+        "unidade": "g",
+        "quantidade": 500,
+        "custo": 9
+      },
+      "sal refinado": {
+        "unidade": "g",
+        "quantidade": 1000,
+        "custo": 2
+      },
+      "ovos grande": {
+        "unidade": "un",
+        "quantidade": 12,
+        "custo": 6
+      },
+      "leite de vaca": {
+        "unidade": "ml",
+        "quantidade": 1000,
+        "custo": 4.5
+      }
+    },
+
     "paodebatata": {
       "titulo": "pão de batata",
       "rendimento": {
         "unidade": "un",
-        "quantidadeSalto": 9,
-        "quantidadeMinimo": 9,
-        "quantidadeMaximo": 36,
+        "quantidade": {
+          "minimo": 9,
+          "maximo": 36
+        },
         "descricao": "de 50 gramas"
       },
       "ingredientes": [
         {
-          "unidade": "g",
-          "quantidadeMinimo": 100,
-          "descricao": "batata inglesa cozida",
-          "custo": 0
+          "quantidade": 100,
+          "descricao": "batata inglesa cozida"
+          
         },
         {
-          "unidade": "g",
-          "quantidadeMinimo": 50,
-          "descricao": "banha de porco",
-          "custo": 0
+          "quantidade": 50,
+          "descricao": "banha de porco"
         },
         {
-          "unidade": "g",
-          "quantidadeMinimo": 225,
-          "descricao": "farinha de trigo",
-          "custo": 0
+          "quantidade": 225,
+          "descricao": "farinha de trigo"
         },
         {
-          "unidade": "g",
-          "quantidadeMinimo": 50,
-          "descricao": "açucar cristal",
-          "custo": 0
+          "quantidade": 50,
+          "descricao": "açucar cristal"
         },
         {
-          "unidade": "g",
-          "quantidadeMinimo": 7.5,
-          "descricao": "fermento biológico fesco",
-          "custo": 0
+          "quantidade": 7.5,
+          "descricao": "fermento biológico fresco"
         },
         {
-          "unidade": "g",
-          "quantidadeMinimo": 2,
-          "descricao": "sal refinado",
-          "custo": 0
+          "quantidade": 2,
+          "descricao": "sal refinado"
         },
         {
-          "unidade": "un",
-          "quantidadeMinimo": 1,
-          "descricao": "ovos grande",
-          "custo": 0
+          "quantidade": 1,
+          "descricao": "ovos grande"
         },
         {
-          "unidade": "ml",
-          "quantidadeMinimo": 30,
-          "descricao": "leite de vaca",
-          "custo": 0
+          "quantidade": 30,
+          "descricao": "leite de vaca"
         }
       ],
       "preparo": {
