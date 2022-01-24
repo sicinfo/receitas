@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "module": "system",
+    "module": "System",
     "baseUrl": ".",
     "moduleResolution": "node",
     "noImplicitReturns": true,
@@ -9,11 +9,5 @@
     "noImplicitAny": true,
     "checkJs": true,
     "strict": true
-  },
-  "include": [
-    "*/**",
-  ],
-  "exclude": [
-    "*/opt"
-  ]
+  }
 }

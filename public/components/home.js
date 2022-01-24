@@ -6,17 +6,39 @@
 'use strict';
 
 //@ts-ignore
-define([
+System.register([
   'react'
-],
-(
-  /** @type {ReactJs} */
-  { createElement: h, useState, Component }
+  //@ts-ignore
+], _export => {
 
-) => {
+  /** @type {ReactJs} */ let React;
 
-  return h('div', null, 'receita')
+  return {
+    setters: [
+      (/**@type {any}*/ arg) => { React = arg.default }
+    ],
+    execute: () => {
+      const { createElement: h } = React;
+
+      _export('default', h('div', null, 'home'))
+    }
+  }
+
 })
+    
+
+// //@ts-ignore
+// define([
+//   'react'
+// ],
+// (
+//   /** @type {ReactJs} */
+//   { createElement: h, useState, Component }
+
+// ) => {
+
+//   return h('div', null, 'home')
+// })
 
 
 

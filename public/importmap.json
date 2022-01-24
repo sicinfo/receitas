@@ -6,6 +6,8 @@
     "react-router": "https://unpkg.com/react-router-dom@5/umd/react-router-dom.min.js",
     "material-ui": "https://unpkg.com/@material-ui/core@latest/umd/material-ui.production.min.js",
     "receita-component": "./components/receita.js",
+    "home-component": "./components/home.js",
+    "admin-component": "./components/admin.js",
     "input-component": "./components/input.js",
     "config": "./config.js"
   }

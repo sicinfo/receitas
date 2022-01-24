@@ -5,37 +5,73 @@
  */
 'use strict';
 
-Promise.all([
+//@ts-ignore
+define([
   'axios',
   'react',
   'react-dom',
   'react-router',
   'material-ui'
-].map(a => System.import(a))).then(async res => {
-
+], async (
   /** @type {AxiosInstance} */
-  const Axios = res[0].default;
-
+  Axios,
   /** @type {ReactJs} */
-  const { Component, lazy, createElement: h } = res[1].default;
-
+  { 
+    Component, 
+    lazy, 
+    createElement: h 
+  },
   /** @type {ReactDom} */
-  const { render } = res[2].default;
-
+  { 
+    render 
+  },
   /** @type {ReactRouterDom}} */
-  const { HashRouter: Router, Route, Link, Switch } = res[3].default;
-
+  { 
+    HashRouter: Router, 
+    Route, 
+    Link, 
+    Switch 
+  },
   /** @type {MaterialUi}} */
-  const { Breadcrumbs, Typography, Container, Box, List, ListItem, GridList, MenuList, MenuItem } = res[4].default;
+  { 
+    Breadcrumbs, 
+    Typography, 
+    Container, 
+    Box, 
+    List, 
+    ListItem, 
+    GridList, 
+    MenuList, 
+    MenuItem 
+  }
+) => {
 
   /** @type {{data:ReceitasRoute}} */
   const { data } = await Axios.get('./data.json');
-  const paths = Object.keys(data).filter(key => 'titulo' in data[key]);
+  const paths = Object.keys(data).filter(key => 'titulo' in data[key])
 
-  paths.unshift('home');
-  Reflect.set(data, 'home', { titulo: 'home' })
+  //@ts-ignore
+  // const ReceitaComponent = await System.import('receita-component').then(a => a.default)
+  paths.some(key => {
+    //@ts-ignore
+    data[key].component = () => h(
+      //@ts-ignore
+      System.import('receita-component'),
+      { receita: data[key], "custos": data.custos }
+    )
+  });
 
-  const ReceitaComponent = await System.import('receita-component').then(a => a.default)
+  paths.unshift('admin', 'home')
+  data.home = { 
+    titulo: 'home',
+    //@ts-ignore
+    component: () => System.import('home-component').then(a => a.default)
+  }
+  data.admin = { 
+    titulo: 'admin',
+    //@ts-ignore
+    component: () => h(System.import('admin-component'))
+  }
 
   {
     let title = document.head.querySelector('title');
@@ -54,8 +90,8 @@ Promise.all([
       ]),
       h(Switch, null, paths.map(key => {
         return h(Route, {
-          path: `/${key}`,
-          component: () => key === 'home' ? h('div') : h(ReceitaComponent, { receita: data[key], "custos": data.custos })
+          path: `/${key}`, 
+          component: data[key].component
         })
       }))
     ]),
@@ -70,4 +106,3 @@ Promise.all([
   )
 
 })
-

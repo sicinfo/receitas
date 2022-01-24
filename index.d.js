@@ -40,9 +40,10 @@
 /**
  * @typedef Receita
  * @property {string} titulo
- * @property {Rendimento} rendimento
- * @property {Preparo} preparo
- * @property {Ingrediente[]} ingredientes
+ * @property {Rendimento} [rendimento]
+ * @property {Preparo} [preparo]
+ * @property {Ingrediente[]} [ingredientes]
+ * @property {ReactComponent} component
  */
 
 /**

@@ -15,7 +15,7 @@ define([
 
 ) => {
 
-  return h('div', null, 'receita')
+  return h('div', null, 'admin')
 })
 
 
