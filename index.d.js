@@ -1,3 +1,7 @@
+/**
+ * 
+ */
+
 /** @typedef { import('axios').AxiosInstance } AxiosInstance */
 
 /** @typedef { import('react') }  ReactJs */
@@ -11,7 +15,9 @@
 /** @typedef { import('react-router-dom').BrowserRouter }  ReactRouter */
 /** @typedef { import('react-router-dom').Route }  ReactRoute */
 
-/** @typedef { import('@material-ui/core') } MaterialUi */
+/** @typedef { import('react-loadable') }  RouteLoadable */
+
+/** @typedef { import('material-ui') } MaterialUi */
 
 /*******************************************************************/
 /*******************************************************************/
@@ -43,11 +49,15 @@
  * @property {Rendimento} rendimento
  * @property {Preparo} preparo
  * @property {Ingrediente[]} ingredientes
+ * @property {?number} custo
  */
 
 /**
  * @typedef {Object.<string, Receita>} ReceitasRoute
  */
+
+
+
 
 
 

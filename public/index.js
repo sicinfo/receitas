@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * application: paodebatata
  * 
@@ -6,65 +8,130 @@
 'use strict';
 
 Promise.all([
-  'axios',
-  'react',
-  'react-dom',
-  'react-router',
-  'material-ui'
+  'axios',            //0
+  'react',            //1
+  'react-dom',        //2
+  'react-router',     //3
+  'material-ui'      //4
 ].map(a => System.import(a))).then(async res => {
 
   /** @type {AxiosInstance} */
   const Axios = res[0].default;
 
   /** @type {ReactJs} */
-  const { Component, lazy, createElement: h } = res[1].default;
+  const {
+    Component,
+    lazy,
+    createElement: h
+  } = res[1].default;
 
   /** @type {ReactDom} */
   const { render } = res[2].default;
 
   /** @type {ReactRouterDom}} */
-  const { HashRouter: Router, Route, Link, Switch } = res[3].default;
+  const {
+    HashRouter: Router,
+    Route,
+    Link,
+    Switch
+  } = res[3].default;
 
   /** @type {MaterialUi}} */
-  const { Breadcrumbs, Typography, Container, Box, List, ListItem, GridList, MenuList, MenuItem } = res[4].default;
+  const {
+    Breadcrumbs,
+    Typography,
+    Container,
+    Box,
+    List,
+    ListItem,
+    GridList,
+    MenuList,
+    MenuItem
+  } = res[4].default;
 
   /** @type {{data:ReceitasRoute}} */
   const { data } = await Axios.get('./data.json');
-  const paths = Object.keys(data).filter(key => 'titulo' in data[key]);
 
-  paths.unshift('home');
-  Reflect.set(data, 'home', { titulo: 'home' })
+  /** @type {[ReactRoute]} */
+  const routes = Object.keys(data)
+    .filter(name => 'titulo' in data[name])
+    .map(name => ({
+      title: data[name].titulo,
+      name,
+      handler: lazy(() => System.import('receita-component').then(a => {
+        /** @type {ReactComponent} */
+        const component = a.default;
 
-  const ReceitaComponent = await System.import('receita-component').then(a => a.default)
+        return h(component, {
+          receita: data[name],
+          custos: data.custos
+        })
+      }))
+    }));
 
-  {
-    let title = document.head.querySelector('title');
-    if (!title)
-      document.head.appendChild(title = document.createElement('title'));
-    title.innerHTML = 'receitas';
-  }
+  routes.unshift({
+    exact: 'exact',
+    name:'home',
+    component: h('div', null, 'home')
+  })
+    
+    
+  //   'home');
+  // Reflect.set(data, 'home', { titulo: 'home' })
 
   render(
     h(Router, null, [
       h(Container, null, [
         h(Typography, { variant: 'h4' }, 'receitas'),
-        h(Breadcrumbs, null, paths.map(key => h(Link, {
-          to: `/${key}`
-        }, data[key].titulo)))
+        h(Breadcrumbs, null, routes.map(({ path: to, title }) => h(Link, { to }, title)))
       ]),
-      h(Switch, null, paths.map(key => {
-        return h(Route, {
-          path: `/${key}`,
-          component: () => key === 'home' ? h('div') : h(ReceitaComponent, { receita: data[key], "custos": data.custos })
-        })
-      }))
+      h(Switch, null, routes.map(arg => h(Route, { ...arg })))
+
+      // h(Switch, null, routes.map(({ exact, path, component }) => {
+      //   const args = { path, component };
+      //   // if (exact) args.exact = exact;
+
+      //   console.log(args);
+
+      //   return h(Route, args);
+      // }))
+
+
+
+      //       return h(Route, {
+      //     path: `/${key}`,
+      //     components: {
+            
+      //       () => {
+
+      //       if (key === 'home')
+      //         return h('div');
+              
+      //         // const ReceitaComponent = await System.import('receita-component').then(a => a.default)
+
+
+
+      //       // return h(ReceitaComponent, {
+      //       //   receita: data[key],
+      //       //   custos: data.custos
+      //       // })
+
+
+      //       return h(System.import('receita-component').then(a => a.default), {
+      //         receita: data[key],
+      //         custos: data.custos
+      //       })
+      //     }
+      //   })
+      // }))
     ]),
     (() => {
+
+      document.head.querySelector('title').innerHTML = 'receitas';
+
       const _div = document.body.querySelector('div');
-      _div?.setAttribute(
-        'style',
-        'display:grid;grid-template-columns:1fr 3fr'
-      );
+      _div?.classList.add('ReceitaMainContainer');
+      
       return _div;
     })()
   )
