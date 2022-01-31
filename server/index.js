@@ -5,7 +5,7 @@
  */
 'use strict';
 
-const { Router, loggin } = require('sicinfo-router')(__filename);
+const { Router, logging } = require('sicinfo-router')(__filename);
 
 module.exports = class extends Router {
   

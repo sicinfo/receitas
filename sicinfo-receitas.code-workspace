@@ -3,6 +3,12 @@
 		{
 			"name": "receitas",
 			"path": "."
+		},
+		{
+			"path": "public"
+		},
+		{
+			"path": "server"
 		}
 	],
 	"settings": {

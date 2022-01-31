@@ -2,6 +2,9 @@
  * 
  */
 
+// @ts-ignore
+/** @typedef {import('systemjs') } System */
+
 /** @typedef { import('axios').AxiosInstance } AxiosInstance */
 
 /** @typedef { import('react') }  ReactJs */
@@ -57,6 +60,7 @@
  */
 
 
+/** @typedef { import('sicinfo-router') } Router */
 
 
 
