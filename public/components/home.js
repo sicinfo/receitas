@@ -18,9 +18,14 @@ System.register([
       _export('version', '0.1.0');
 
       _export('default', () => {
-        const {createElement:h} = ReactJs;
+        const { Component, createElement: h } = ReactJs;
     
-        return h('div', null, 'home');
+        return class extends Component {
+          render() {
+            return h('div', null, 'home');
+          }
+        }
+        
       })    
     }
   }

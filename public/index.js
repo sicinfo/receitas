@@ -61,27 +61,29 @@ System.import('axios').then(res => {
     const el = document.body.querySelector('div');
     el?.classList.add('ReceitasMainContainer');
 
-    return { axios, Component, Suspense, h, render, Route, Link, Switch, Router, data, el }
+    return { axios, Component, Suspense, lazy, h, render, Route, Link, Switch, Router, data, el }
 
   })
 
-}).then(({ render, el, h, Router, Suspense, Switch, Route, Link, data }) => {
+}).then(({ render, el, Component, h, Router, Suspense, Switch, Route, Link, lazy, data }) => {
 
   const links = Object.entries(data).map(([to, title]) => [`/${to}`, title]);
-  const routes = links.map(([path], key) => ({
-    key,
-    path, 
-    render: () => lazy(() => System.import('receita-component'))
-  }))
-
-
+  const routes = links.map(([path], key) => [
+    { path },
+    class extends Component {
+      render() {
+        return h('div', null, 'teste')
+      }
+    }
+    
+  ])
 
   render(
     h(Suspense, 
       { fallback: h('div', null, 'wait...') }, 
       h(Router, {}, [
         // h('div', null, links.map(([to, title]) => h(Link, { to }, title))),
-        h(Switch, null, routes.map(route => h(Route, route)))
+        h(Switch, null, routes.map(([props, component]) => h(Route, props, h(component))))
       ])
     ), el
   )

@@ -2,6 +2,7 @@
  * application receitas
  * 
  * powered by moreira 2022-01-24
+ * @author moreira
  */
 'use strict';
 
