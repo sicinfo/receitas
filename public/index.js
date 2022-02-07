@@ -26,7 +26,7 @@ System.import('axios').then(res => {
   return Promise.all([
     'react',            //0
     'react-dom',        //1
-    'react-router',     //2
+    'react-router-dom',     //2
     // 'material-ui'       //3
   ].map(a => System.import(a).then(a => a.default || a))).then(([
     ReactJs,
@@ -35,20 +35,13 @@ System.import('axios').then(res => {
   ]) => {
 
     /** @type {ReactJs} */
-    const { Component, Suspense, lazy, createElement: h } = ReactJs.default;
+    const { Component, Suspense, lazy, createElement: h } = ReactJs;
 
     /** @type {ReactDom.render} */
-    const { render } = ReactDom.default;
+    const { render } = ReactDom;
 
     /** @type {ReactRouterDom}} */
-    const { Route, Link, Switch, HashRouter: Router } = ReactRouterDom.default;
-
-    const links = Object.entries(data).map(([k, v]) => [`/${k}`, v]);
-    const routes = Object.keys(data).map(receita => ({
-      name: receita,
-      props: { receita },
-      component: lazy(() => System.import('receita-component'))
-    }))
+    const { Route, NavLink: Link, Switch, HashRouter: Router } = ReactRouterDom;
 
     // /** @type {MaterialUi}} */
     // const {
@@ -63,27 +56,34 @@ System.import('axios').then(res => {
     //   MenuItem
     // } = res[3].default;
 
-    return { axios, Component, Suspense, h, render, Route, Link, Switch, Router, links, routes }
+
+    document.head.querySelector('title').innerHTML = 'receitas';
+    const el = document.body.querySelector('div');
+    el?.classList.add('ReceitasMainContainer');
+
+    return { axios, Component, Suspense, h, render, Route, Link, Switch, Router, data, el }
 
   })
 
-}).then(({ }) => {
+}).then(({ render, el, h, Router, Suspense, Switch, Route, Link, data }) => {
 
-  console.log(routes)
+  const links = Object.entries(data).map(([to, title]) => [`/${to}`, title]);
+  const routes = links.map(([path], key) => ({
+    key,
+    path, 
+    render: () => lazy(() => System.import('receita-component'))
+  }))
+
+
 
   render(
-    h('div', null, 'teste')
-    ,
-    (() => {
-
-      document.head.querySelector('title').innerHTML = 'receitas';
-
-      const _div = document.body.querySelector('div');
-      // _div?.classList.add('ReceitaMainContainer');
-
-      return _div;
-    })()
-
+    h(Suspense, 
+      { fallback: h('div', null, 'wait...') }, 
+      h(Router, {}, [
+        // h('div', null, links.map(([to, title]) => h(Link, { to }, title))),
+        h(Switch, null, routes.map(route => h(Route, route)))
+      ])
+    ), el
   )
 
 })

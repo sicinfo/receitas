@@ -8,10 +8,10 @@
     "noImplicitAny": true,
     "checkJs": true,
     "strict": true,
-    "baseUrl": "./public"
+    "baseUrl": "."
   },
   "exclude": [
-    "*/opt",
+    "opt",
     "node_modules",
     "**/node_modules/*"
   ]

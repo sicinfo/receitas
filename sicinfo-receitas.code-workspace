@@ -5,10 +5,10 @@
 			"path": "."
 		},
 		{
-			"path": "public"
+			"path": "server"
 		},
 		{
-			"path": "server"
+			"path": "public"
 		}
 	],
 	"settings": {
