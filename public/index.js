@@ -72,21 +72,22 @@ System.import('axios').then(async res => {
   })
 
   links.unshift(h('div', null, h(Link, { to: '/' }, 'home')))
+  links.push(h('div', null, h(Link, { to: '/login' }, 'login')))
 
-  const HomeComponent = () => System.import('home-component')
-
-  routes.unshift(h(Route, {
-    path: '/',
-    element: h(lazy(HomeComponent))
-  }));
-
-  // routes.push(h(Redirect, { from: '*', to: '/' }))
-
-  
-  routes.push(h(Route, {
-    path: '*',
-    element: h(Redirect, { replace: true, to: '/' })
-  }));
+  routes.push(
+    h(Route, {
+      path: '/',
+      element: h(lazy(() => System.import('home-component')))
+    }),
+    h(Route, {
+      path: '/login',
+      element: h(lazy(() => System.import('login-component')))
+    }),
+    h(Route, {
+      path: '*',
+      element: h(Redirect, { replace: true, to: '/' })
+    })
+  );
 
   render(
     h(Suspense, 

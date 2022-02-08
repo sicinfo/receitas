@@ -23,6 +23,8 @@
 
     "receita-component": "./components/receita.js",
     "home-component": "./components/home.js",
+    "login-component": "./components/login.js",
+    "admin-component": "./components/admin.js",
     
     "input-component": "./components/input.js",
     "config": "./config.js"
