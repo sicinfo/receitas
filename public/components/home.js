@@ -1,11 +1,10 @@
 /**
  * powered by moreira - 2022-01-24
+ * @author moreira
  */
 'use stric'
 
-System.register([
-  'react'
-], (_export, _context) => {
+System.register(['react'], (_export, _context) => {
   
   /** @type {ReactJs} */ let ReactJs;
 
@@ -18,14 +17,9 @@ System.register([
       _export('version', '0.1.0');
 
       _export('default', () => {
-        const { Component, createElement: h } = ReactJs;
+        const {createElement: h } = ReactJs;
     
-        return class extends Component {
-          render() {
-            return h('div', null, 'home');
-          }
-        }
-        
+        return h('div');        
       })    
     }
   }

@@ -8,15 +8,16 @@
 /** @typedef { import('axios').AxiosInstance } AxiosInstance */
 
 /** @typedef { import('react') }  ReactJs */
+/** @typedef { import('react').ReactPropTypes }  ReactPropTypes */
 /** @typedef { import('react').Component }  ReactComponent */
 /** @typedef { import('react').ChangeEventHandler } ReactChangeEventHandler */
 /** @typedef { import('react').InputHTMLAttributes<HTMLInputElement> }  ReactInputAttributes */
 
 /** @typedef { import('react-dom') }  ReactDom */
 
+/** @typedef { import('react-router') }  ReactRouter */
+
 /** @typedef { import('react-router-dom') }  ReactRouterDom */
-/** @typedef { import('react-router-dom').BrowserRouter }  ReactRouter */
-/** @typedef { import('react-router-dom').Route }  ReactRoute */
 
 /** @typedef { import('react-loadable') }  RouteLoadable */
 

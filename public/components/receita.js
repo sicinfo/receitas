@@ -12,6 +12,16 @@ System.register([
   /** @type {ReactJs} */ 
   let ReactJs;
 
+  /**
+   * 
+   * @param {any} props 
+   */
+  const _default = (props) => {
+    const { createElement: h } = ReactJs;
+
+    return h('div', null, 'receita');
+  }
+
   return {
     setters: [
       a => { ReactJs = a.default }
@@ -20,11 +30,7 @@ System.register([
     execute: () => {
       _export('version', '0.1.0');
 
-      _export('default', () => {
-        const { createElement: h } = ReactJs;
-    
-        return h('div', null, 'receita');
-      })    
+      _export('default', _default)
     }
   }
 })

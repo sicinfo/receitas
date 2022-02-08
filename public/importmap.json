@@ -1,15 +1,29 @@
 {
   "imports": {
     "axios": "https://unpkg.com/axios/dist/axios.min.js",
+    
     "react1": "https://unpkg.com/react@17/umd/react.production.min.js",
     "react": "https://unpkg.com/react@17/umd/react.development.js",
+    
     "react-dom1": "https://unpkg.com/react-dom@17/umd/react-dom.production.min.js",
     "react-dom": "https://unpkg.com/react-dom@17/umd/react-dom.development.js",
-    "react-router-dom1": "https://unpkg.com/react-router-dom@5/umd/react-router-dom.min.js",
-    "react-router-dom": "https://unpkg.com/react-router-dom@5/umd/react-router-dom.js",
+
+    "react-router-dom1": "https://unpkg.com/react-router-dom@6/umd/react-router-dom.production.min.js",
+    "react-router-dom": "https://unpkg.com/react-router-dom@6/umd/react-router-dom.development.js",
+    "react-router-dom3": "https://unpkg.com/react-router-dom@6/react-router-dom.development.js",
+
+    "react-routerp": "https://unpkg.com/react-router@6/umd/react-router-dom.production.min.js",
+    "react-router": "https://unpkg.com/react-router@6/umd/react-router.development.js",
+
+    "history1": "https://unpkg.com/history@5.2.0/umd/history.production.min.js",
+    "history": "https://unpkg.com/history@5.2.0/umd/history.development.js",
+    
     "react-loadable": "https://unpkg.com/react-loadable@5.5.0/lib/babel.js",
     "material-ui": "https://unpkg.com/@material-ui/core@latest/umd/material-ui.production.min.js",
+
     "receita-component": "./components/receita.js",
+    "home-component": "./components/home.js",
+    
     "input-component": "./components/input.js",
     "config": "./config.js"
   }

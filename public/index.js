@@ -7,86 +7,96 @@
  */
 'use strict';
 
+document.head.querySelector('title').innerHTML = 'receitas';
 
-
-System.import('axios').then(res => {
-
+System.import('axios').then(async res => {
+  
   /** @type {AxiosInstance} */
   const axios = res.default;
 
-  return axios.get('/index.txt').then(({ data }) => {
-    axios.defaults.baseURL = `/${data}`;
-    return axios.get('config').then(({ data }) => {
-      return {axios, data }
+  return Promise.all(
+    [
+      'react',
+      'react-dom',
+      'react-router-dom',
+      'react-router',
+      'history'
+    ].map(res => System.import(res).then(res => res.default))
+      .concat(axios.get('/index.txt').then(({ data }) => {
+        axios.defaults.baseURL = `/${data}`;
+        return axios.get('config')
+      }))
+  ).then((
+    /** @type [ReactJs, ReactDom, ReactRouterDom, ReactRouter, record<string,string>] */
+    [
+      { Component, Suspense, lazy, createElement: h }, 
+      { render }, 
+      { Route, NavLink: Link, Routes, BrowserRouter: Router, Navigate: Redirect }, 
+      { },
+      { createBrowserHistory },
+      { data }
+    ]
+  ) => {
+    
+//     // /** @type {MaterialUi}} */
+//     // const {
+//     //   Breadcrumbs,
+//     //   Typography,
+//     //   Container,
+//     //   Box,
+//     //   List,
+//     //   ListItem,
+//     //   GridList,
+//     //   MenuList,
+//     //   MenuItem
+//     // } = res[3].default;
+
+    return { axios, Component, Suspense, lazy, h, render, Redirect, Route, Link, Routes, Router, data, history: createBrowserHistory() }
+  })
+
+}).then(({ render, Component, h, Router, Suspense, Routes, Redirect, Route, Link, lazy, data, history }) => {
+
+  const el = document.body.querySelector('div');
+  el?.classList.add('ReceitasMainContainer');
+
+  const links = Object.keys(data).map(to => {
+    return h('div', null, h(Link, { to }, data[to]))
+  })
+
+  const routes = Object.keys(data).map(name => {
+    return h(Route, {
+      name,
+      path: `/${name}`,
+      element: h(lazy(() => System.import('receita-component')), { title: 'receitas' })
     })
   })
 
-}).then(({ axios, data }) => {
+  links.unshift(h('div', null, h(Link, { to: '/' }, 'home')))
 
-  return Promise.all([
-    'react',            //0
-    'react-dom',        //1
-    'react-router-dom',     //2
-    // 'material-ui'       //3
-  ].map(a => System.import(a).then(a => a.default || a))).then(([
-    ReactJs,
-    ReactDom,
-    ReactRouterDom
-  ]) => {
+  const HomeComponent = () => System.import('home-component')
 
-    /** @type {ReactJs} */
-    const { Component, Suspense, lazy, createElement: h } = ReactJs;
+  routes.unshift(h(Route, {
+    path: '/',
+    element: h(lazy(HomeComponent))
+  }));
 
-    /** @type {ReactDom.render} */
-    const { render } = ReactDom;
+  // routes.push(h(Redirect, { from: '*', to: '/' }))
 
-    /** @type {ReactRouterDom}} */
-    const { Route, NavLink: Link, Switch, HashRouter: Router } = ReactRouterDom;
-
-    // /** @type {MaterialUi}} */
-    // const {
-    //   Breadcrumbs,
-    //   Typography,
-    //   Container,
-    //   Box,
-    //   List,
-    //   ListItem,
-    //   GridList,
-    //   MenuList,
-    //   MenuItem
-    // } = res[3].default;
-
-
-    document.head.querySelector('title').innerHTML = 'receitas';
-    const el = document.body.querySelector('div');
-    el?.classList.add('ReceitasMainContainer');
-
-    return { axios, Component, Suspense, lazy, h, render, Route, Link, Switch, Router, data, el }
-
-  })
-
-}).then(({ render, el, Component, h, Router, Suspense, Switch, Route, Link, lazy, data }) => {
-
-  const links = Object.entries(data).map(([to, title]) => [`/${to}`, title]);
-  const routes = links.map(([path], key) => [
-    { path },
-    class extends Component {
-      render() {
-        return h('div', null, 'teste')
-      }
-    }
-    
-  ])
+  
+  routes.push(h(Route, {
+    path: '*',
+    element: h(Redirect, { replace: true, to: '/' })
+  }));
 
   render(
     h(Suspense, 
       { fallback: h('div', null, 'wait...') }, 
-      h(Router, {}, [
-        // h('div', null, links.map(([to, title]) => h(Link, { to }, title))),
-        h(Switch, null, routes.map(([props, component]) => h(Route, props, h(component))))
+      h(Router, { history }, [
+        h('nav', null, links),
+        h(Routes, null, routes)
       ])
     ), el
-  )
+   )
 
 })
 
