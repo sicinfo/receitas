@@ -19,6 +19,7 @@
     "history": "https://unpkg.com/history@5.2.0/umd/history.development.js",
     
     "react-loadable": "https://unpkg.com/react-loadable@5.5.0/lib/babel.js",
+    "material-ui1": "https://unpkg.com/@material-ui/core@latest/umd/material-ui.production.min.js",
     "material-ui": "https://unpkg.com/@material-ui/core@latest/umd/material-ui.production.min.js",
 
     "receita-component": "./components/receita.js",

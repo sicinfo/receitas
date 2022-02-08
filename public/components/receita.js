@@ -5,25 +5,109 @@
  */
 'use strict'
 
-System.register([
-  'react'
-], (_export, _context) => {
+System.register(['axios', 'react'], async (_export, _context) => {
   
-  /** @type {ReactJs} */ 
-  let ReactJs;
+  /** @type {ReactJs} */ let ReactJs;
+  /** @type {AxiosInstance} */ let axios;
+})
+  
+  const getReceita = async (/** @type{string} */ name) => {
+    return await axios.get(`receita/${name}`).then(({ data }) => data);
+  }
 
   /**
-   * 
-   * @param {any} props 
+   * @param {Record<string,string>} arg
    */
-  const _default = (props) => {
-    const { createElement: h } = ReactJs;
+  const _default = ({name}) => {
+    const { createElement: h, useState, Component } = ReactJs;
 
-    return h('div', null, 'receita');
-  }
+    const data = getReceita(name);
+    
+    const { 
+      titulo: tit,
+      rendimento: { 
+        descricao: desc, 
+        unidade: und, 
+        quantidade: { 
+          minimo: min, 
+          maximo: max 
+        }, 
+        preparo: prep 
+      },
+      ingredientes: ings
+    } = data;
+
+  // // } = /** @type {any} */ (await axios.get(`receita/${name}`).then(({ data }) => data));
+    
+    // /** @type {[any,any]} */
+    // const [values, setState] = useState({
+    //   __quantidade: min,
+    //   __custo: 0,
+    //   __salto: 1
+    // });
+
+    // /** 
+    //  * @param {Record<string,string>} props
+    //  */
+    // const ListIngredientes = props => {
+    //   const { descricao: desc } = props;
+    //   const { quantidade: qtd, salto } = values[desc];
+    //   return h('li', null, `${qtd * values.__salto} ${desc}`)
+    // }
+
+    // return h('div', null, tit)
+     
+    // return h('div', null, [
+    //   h('h2', null, tit),
+    //   h('div', null, [
+    //     h('span', null, 'porções '),
+    //     h('input', {
+    //       type: 'range',
+    //       name: 'InputQuantidade',
+    //       defaultValue: min,
+    //       inputProps: { min, max, step: min },
+    //       onChange: (evt) => {
+    //         evt.stopPropagation();
+    //         const { value, step } = /** @type {Record<string,any>} */ (evt.target);
+    //         values.__salto = 0 + value / step;
+    //         values.__quantidade = value;
+    //         setState({ ...values });
+    //       }
+    //     })
+    //   ]),
+    //   h('div', null, [
+    //     h('span', null, 'rendimento '),
+    //     h('span', null, values.__quantidade),
+    //     h('span', null, ` ${und} ${desc}`)
+    //   ]),
+    //   h('h3', null, [
+    //     h('span', null, 'ingredientes  -  custo R$ '),
+    //     h('span', null, Math.ceil(values.__custo * values.__salto * 100) / 100)
+    //   ]),
+    //   h('ul', null, /** @type {Record<string,any>[]} */ (ings).map(({unidade: und, descricao: desc, quantidade: qtd, custo: cust }) => {
+
+    //     // const key = (a => `${custos[a].unidade} ${a}`)(ingr.descricao);
+    //     const key = `${und} ${desc}`;
+
+    //     if (!(key in values)) {
+    //       values[key] = {
+    //         quantidade: qtd,
+    //         custo: cust
+    //       };
+    //       values.__custo += values[key].custo
+    //       setState({ ...values });
+    //     }
+
+    //     return h(ListIngredientes, { descricao: key });
+    //   })),
+    //   h('h3', null, `modo de preparo`),
+    //   h('ol', null, prep?.modo.map((/** @type {string} */ item) => h('li', null, item)))
+    // ])
+// }
 
   return {
     setters: [
+      a => { axios = a.default },
       a => { ReactJs = a.default }
     ],
 

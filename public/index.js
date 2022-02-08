@@ -65,9 +65,8 @@ System.import('axios').then(async res => {
 
   const routes = Object.keys(data).map(name => {
     return h(Route, {
-      name,
       path: `/${name}`,
-      element: h(lazy(() => System.import('receita-component')), { title: 'receitas' })
+      element: h(lazy(() => System.import('receita-component')), { name })
     })
   })
 
