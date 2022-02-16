@@ -28,9 +28,14 @@
 
 /**@typedef {'un'} Unidade */
 
+/** @typedef Quantidade 
+ * @property {?number} maximo
+ * @property {?number} minimo
+ */
+
 /** @typedef Rendimento 
  * @property {?string} descricao
- * @property {?number} quantidade
+ * @property {?Quantidade} quantidade
  * @property {?Unidade} unidade
  */
 
@@ -49,11 +54,11 @@
 
 /**
  * @typedef Receita
- * @property {string} titulo
- * @property {Rendimento} rendimento
- * @property {Preparo} preparo
- * @property {Ingrediente[]} ingredientes
- * @property {?number} custo
+ * @property {string} [titulo]
+ * @property {Rendimento} [rendimento]
+ * @property {Preparo} [preparo]
+ * @property {Ingrediente[]} [ingredientes]
+ * @property {?number} [custo]
  */
 
 /**
