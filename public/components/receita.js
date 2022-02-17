@@ -1,4 +1,4 @@
-/**
+/** *
  * application receitas
  * 
  * @author moreira 2021-08-31
