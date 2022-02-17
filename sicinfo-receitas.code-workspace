@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"name": "receitas",
+			"path": "."
+		},
+		{
+			"path": "server"
+		},
+		{
+			"path": "public"
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"*.code-workspace": true,
+			"**/.gitignore": true
+		}
+	}
+}

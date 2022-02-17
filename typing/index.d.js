@@ -1,19 +1,23 @@
 /**
- * 
+ * @author moreira
  */
+
+// @ts-ignore
+/** @typedef {import('systemjs') } System */
 
 /** @typedef { import('axios').AxiosInstance } AxiosInstance */
 
 /** @typedef { import('react') }  ReactJs */
+/** @typedef { import('react').ReactPropTypes }  ReactPropTypes */
 /** @typedef { import('react').Component }  ReactComponent */
 /** @typedef { import('react').ChangeEventHandler } ReactChangeEventHandler */
 /** @typedef { import('react').InputHTMLAttributes<HTMLInputElement> }  ReactInputAttributes */
 
 /** @typedef { import('react-dom') }  ReactDom */
 
+/** @typedef { import('react-router') }  ReactRouter */
+
 /** @typedef { import('react-router-dom') }  ReactRouterDom */
-/** @typedef { import('react-router-dom').BrowserRouter }  ReactRouter */
-/** @typedef { import('react-router-dom').Route }  ReactRoute */
 
 /** @typedef { import('react-loadable') }  RouteLoadable */
 
@@ -24,9 +28,14 @@
 
 /**@typedef {'un'} Unidade */
 
+/** @typedef Quantidade 
+ * @property {?number} maximo
+ * @property {?number} minimo
+ */
+
 /** @typedef Rendimento 
  * @property {?string} descricao
- * @property {?number} quantidade
+ * @property {?Quantidade} quantidade
  * @property {?Unidade} unidade
  */
 
@@ -45,11 +54,11 @@
 
 /**
  * @typedef Receita
- * @property {string} titulo
- * @property {Rendimento} rendimento
- * @property {Preparo} preparo
- * @property {Ingrediente[]} ingredientes
- * @property {?number} custo
+ * @property {string} [titulo]
+ * @property {Rendimento} [rendimento]
+ * @property {Preparo} [preparo]
+ * @property {Ingrediente[]} [ingredientes]
+ * @property {?number} [custo]
  */
 
 /**
@@ -57,6 +66,7 @@
  */
 
 
+/** @typedef { import('sicinfo-router') } Router */
 
 
 

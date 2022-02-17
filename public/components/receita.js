@@ -1,91 +1,98 @@
 /**
  * application receitas
  * 
- * powered by moreira 2021-08-31
+ * @author moreira 2021-08-31
  */
+'use strict'
 
-/** 
- * @typedef Props 
- * @property {?string} key
- */
-System.register([
-  'react',
-  'material-ui'
-], (_export, _context) => {
-    /** @type {ReactJs} */ let React;
-    /** @type {MaterialUi} */ let MaterialUi;
+System.register(['axios', 'react'], (_export, _context) => {
 
-  _export('default', (/** @type {Receita} */ { receita, custos }) => {
+  const _version = '0.1.0';
 
-    const { createElement: h, useState, Component } = React;
-    const { Container, Typography, InputBase, Input, Box, List, ListItem } = MaterialUi;
-    const { titulo, rendimento, ingredientes = [], preparo } = receita;
-    const { minimo: min, maximo: max } = rendimento.quantidade;
+  /** @type {ReactJs} */ let ReactJs;
+  /** @type {AxiosInstance} */ let axios;
+  
+  /** @param {Record<string,string>} _*/
+  const _default = ({ name }) => {
+    const { createElement: h, useState } = ReactJs;
 
-    const [values, setState] = useState({ 
-      __quantidade: min,
-      __custo: 0,
-      __salto: 1
-    })
+    /** @type {[Receita, any]} */
+    const [receita, setReceita] = useState({})
 
-    const ListIngredientes = props => {
-      const { quantidade, salto } = values[props.descricao];
-      return h(ListItem, null, `${quantidade * values.__salto} ${props.descricao}`)
+    /** @type {[Record<string,number>, any]} */
+    const [values, setValues] = useState({})
+
+    /** @type {[Record<string,any>, any]} */
+    const [ings, setIngs] = useState({ __cust: 0 })
+
+    if (!receita.titulo) {
+      axios.get(`receita/${name}`).then(/** @type {Receita} */ ({ data }) => {
+        console.log(data);
+        const { minimo: min, maximo: max } = data.rendimento.quantidade;
+        setReceita({ ...data })
+        setValues({
+          step: 1 * min,
+          qtd: 1 * min,
+          salt: 1
+        })
+      })
+      return h('div', null, '')
     }
 
-    return h(Container, null, [
-      h(Box, { component: 'h2' }, titulo),
-      h(Typography, null, [
-        h(Box, { component: 'span' }, 'porções '),
-        h(Input, {
+    return h('div', null, [
+      h('h2', null, receita.titulo),
+      h('div', null, [
+        h('span', null, 'porções '),
+        h('input', {
           type: 'range',
           name: 'InputQuantidade',
-          defaultValue: min,
-          inputProps: { min, max, step: min },
-          onChange: (evt) => {
+          defaultValue: receita.rendimento?.quantidade?.minimo,
+          min: receita.rendimento?.quantidade?.minimo,
+          max: receita.rendimento?.quantidade?.maximo,
+          step: values.step,
+          onChange: evt => {
             evt.stopPropagation();
-            const { value, step } = evt.target;
-            values.__salto = 0 + value / step;
-            values.__quantidade = value;
-            setState({ ...values });
+            const { value } = /** @type {Record<string,any>} */ (evt.target);
+            values.qtd = 1 * (value || 0);
+            values.salt = values.qtd / values.step;
+            setValues({ ...values })
           }
         })
       ]),
-      h(Typography, null, [
-        h(Box, { component: 'span' }, 'rendimento '),
-        h(Box, { component: 'span' }, values.__quantidade),
-        h(Box, { component: 'span' }, ` ${rendimento.unidade} ${rendimento.descricao}`)
+      h('div', null, [
+        h('span', null, 'rendimento '),
+        h('span', null, values.qtd),
+        h('span', null, ` ${receita.rendimento?.unidade} ${receita.rendimento?.descricao}`)
       ]),
-      h(Box, { component: 'h3' }, [
-        h(Box, { component: 'span' }, 'ingredientes  -  custo R$ '),
-        h(Box, { component: 'span' }, Math.ceil(values.__custo * values.__salto * 100) / 100)
+      h('h3', null, [
+        h('span', null, 'ingredientes  -  custo R$ '),
+        h('span', null, Math.ceil(ings.__cust * values.salt * 100) / 100)
       ]),
-      h(List, null, ingredientes.map(ingr => {
-
-        const key = (a => `${custos[a].unidade} ${a}`)(ingr.descricao);
-
-        if (!(key in values)) {
-          values[key] = {
-            quantidade: ingr.quantidade,
-            custo: (a => a.custo / a.quantidade)(custos[ingr.descricao]) * ingr.quantidade
-          };
-          values.__custo += values[key].custo
-          setState({ ...values });
-        }
-
-        return h(ListIngredientes, { descricao: key });
-      })),
-      h(Box, { component: 'h3' }, `modo de preparo`),
-      h(List, null, preparo?.modo.map(item => h(ListItem, null, item)))
+      h('ul', 
+        null, 
+        receita.ingredientes?.map(({unidade: und, descricao: desc, quantidade: qtd, custo: cust }) => {
+          const key = `${und} ${desc}`;
+          if (!(key in ings)) {
+            ings[key] = { qtd, cust };
+            ings.__cust += cust;
+            setIngs({ ...ings })
+          }
+          return h('li', null, `${ qtd * values.salt} ${desc}`)
+        })
+      )
     ])
-
-  });
+  }
 
   return {
     setters: [
-      arg => { React = arg.default },
-      arg => { MaterialUi = arg.default }
-    ]
+      a => { axios = a.default },
+      a => { ReactJs = a.default }
+    ],
+    execute: () => {
+      _export('version', _version);
+      _export('default', _default);
+    }
   }
-
 })
+
+

@@ -1,0 +1,53 @@
+{
+  "paodebatata": {
+    "titulo": "pão de batata",
+    "rendimento": {
+      "unidade": "un",
+      "quantidade": {
+        "minimo": 9,
+        "maximo": 36
+      },
+      "descricao": "de 50 gramas"
+    },
+    "ingredientes": [
+      {
+        "quantidade": 100,
+        "descricao": "batata inglesa cozida"
+      },
+      {
+        "quantidade": 50,
+        "descricao": "banha de porco"
+      },
+      {
+        "quantidade": 225,
+        "descricao": "farinha de trigo"
+      },
+      {
+        "quantidade": 50,
+        "descricao": "açucar cristal"
+      },
+      {
+        "quantidade": 7.5,
+        "descricao": "fermento biológico fresco"
+      },
+      {
+        "quantidade": 2,
+        "descricao": "sal refinado"
+      },
+      {
+        "quantidade": 1,
+        "descricao": "ovos grande"
+      },
+      {
+        "quantidade": 30,
+        "descricao": "leite de vaca"
+      }
+    ],
+    "preparo": {
+      "tempo": "1h",
+      "modo": [
+        "misturar os ingredientes e sovar até a massa ficar lisa"
+      ]
+    }
+  }
+}
