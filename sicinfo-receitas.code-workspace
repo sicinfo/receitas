@@ -13,6 +13,7 @@
 	],
 	"settings": {
 		"files.exclude": {
+			"**/node_modules": true,
 			"*.code-workspace": true,
 			"**/.gitignore": true
 		}
