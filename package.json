@@ -10,8 +10,9 @@
     "type": "git",
     "url": "git+https://github.com/sicinfo/receitas.git"
   },
-  "dependencies": {
-    "sicinfo-config": "github:sicinfo/config#develop"
+  "devDependencies": {
+    "sicinfo-config": "file:config",
+    "sicinfo-router": "file:router"
   },
   "author": "moreira",
   "license": "ISC",

@@ -1,2 +1,3 @@
 tmp
-etc/dist
+node_modules
+package-lock.json
