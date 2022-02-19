@@ -1,1 +1,4 @@
 *.code-workspace
+typing
+jsconfig.json
+*/jsconfig.json
