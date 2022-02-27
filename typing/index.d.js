@@ -65,8 +65,27 @@
  * @typedef {Object.<string, Receita>} ReceitasRoute
  */
 
+/** @typedef {import('arangojs').Database} ArangoDb */
 
-/** @typedef { import('sicinfo-router') } Router */
+/** 
+ * @typedef DbCfg
+ * @prop {string} databaseName
+ * @prop {DbCfgAuth} auth
+ */ /**
+ * @typedef DbCfgAuth
+ * @prop {string} username
+ * @prop {string} [passwd]
+ * @prop {string} [password]
+ */ /**
+ * @typedef ReceitasCache
+ * @prop {Promise<ArangoDb>} [db]
+ */ 
+
+/** @typedef {import('index').ReceitasCache}
+ */
+/* @typedef { import('sicinfo-router') } Router */
+
+/* @typedef { import('sicinfo-router').RouterOptions } RouterOptions */
 
 
 

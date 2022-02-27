@@ -7,15 +7,9 @@
 const { readFile } = require('fs');
 const { get } = require('http');
 const { join: pathJoin } = require('path')
-const { Service, logging } = require('sicinfo-router')(__filename);
+const { Service, logging } = require('./service-common.js')(__filename);
 
 module.exports = class extends Service {
-
-  doGet() {
-    console.log(this.id);
-    console.log(this.doc)
-    return super.doGet()
-  }
 
   /** @param {string} key */
   doGetById(key) {

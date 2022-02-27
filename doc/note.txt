@@ -1,0 +1,20 @@
+esquema de dados
+
+https://yuml.me/diagram/scruffy/class/draw
+
+[receita|#nome]
+[marca|#nome]
+[produto|#nome]
+[loja|#nome]
+[lista|responsável;data]
+
+[item|unidade;quantidade]
+[compra|quantidade;preço]
+[vende|preço]
+[unidade|de;para;fator]
+[ingrediente|unidade;quantidade]
+
+[loja]-from>[vende]-to>[item]
+[lista]-from>[compra]-to>[item]
+[marca]-from>[item]-to>[produto]
+[receita]1-from>[ingrediente]*-to>[compra]

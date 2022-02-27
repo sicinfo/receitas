@@ -5,14 +5,13 @@
  */
 'use strict';
 
-
 const { readFile } = require('fs')
 const { join: pathJoin } = require('path')
 const { Service, logging } = require('sicinfo-router')(__filename);
 
 module.exports = class extends Service {
 
-  doGetByQuery() {
+  doGet() {
     return new Promise((resolve, reject) => {
       readFile(pathJoin(__dirname, '..', 'models', 'receitas.json'), 'utf8', (err, res) => {
         if (err) return reject(err);
